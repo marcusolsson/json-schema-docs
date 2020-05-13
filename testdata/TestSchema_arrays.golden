@@ -1,0 +1,9 @@
+A representation of a person, company, organization, or place
+
+## Properties
+
+| Property     | Type  | Required | Description |
+|--------------|-------|----------|-------------|
+| `fruits`     | array | false    |             |
+| `vegetables` | array | false    |             |
+

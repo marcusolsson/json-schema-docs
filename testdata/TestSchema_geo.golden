@@ -1,0 +1,11 @@
+# Longitude and Latitude Values
+
+A geographical coordinate.
+
+## Properties
+
+| Property    | Type   | Required | Description |
+|-------------|--------|----------|-------------|
+| `latitude`  | number | **true** |             |
+| `longitude` | number | **true** |             |
+
