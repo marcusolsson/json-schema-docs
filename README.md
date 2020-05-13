@@ -22,7 +22,7 @@ json-schema-docs -schema ./user.schema.json > user.md
 To use a template when generating the Markdown:
 
 ```
-json-schema-docs -schema ./user.schema.json -template user.md.tpl
+json-schema-docs -schema ./user.schema.json -template user.md.tpl > user.md
 ```
 
 `template` is the path to a file containing a Go template, such as this one:
