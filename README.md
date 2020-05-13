@@ -7,7 +7,13 @@ A simple JSON Schema to Markdown generator.
 
 This generator doesn't attempt to support the full JSON Schema specification. Instead, it's designed with the rationale that most people are only using a subset of the spec.
 
-## Usage
+## Install
+
+```
+go get -u github.com/grafana/json-schema-docs
+```
+
+## Run
 
 ```
 json-schema-docs -schema ./user.schema.json > user.md
