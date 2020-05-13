@@ -1,0 +1,54 @@
+A representation of a person, company, organization, or place
+
+## Properties
+
+| Property          | Type             | Required | Description    |
+|-------------------|------------------|----------|----------------|
+| `familyName`      | string           | **true** |                |
+| `givenName`       | string           | **true** |                |
+| `additionalName`  | array            | false    |                |
+| `adr`             |                  | false    |                |
+| `bday`            | string           | false    |                |
+| `email`           | [object](#email) | false    |                |
+| `fn`              | string           | false    | Formatted Name |
+| `geo`             |                  | false    |                |
+| `honorificPrefix` | array            | false    |                |
+| `honorificSuffix` | array            | false    |                |
+| `logo`            | string           | false    |                |
+| `nickname`        | string           | false    |                |
+| `org`             | [object](#org)   | false    |                |
+| `photo`           | string           | false    |                |
+| `role`            | string           | false    |                |
+| `sound`           | string           | false    |                |
+| `tel`             | [object](#tel)   | false    |                |
+| `title`           | string           | false    |                |
+| `tz`              | string           | false    |                |
+| `url`             | string           | false    |                |
+
+## email
+
+### Properties
+
+| Property | Type   | Required | Description |
+|----------|--------|----------|-------------|
+| `type`   | string | false    |             |
+| `value`  | string | false    |             |
+
+## org
+
+### Properties
+
+| Property           | Type   | Required | Description |
+|--------------------|--------|----------|-------------|
+| `organizationName` | string | false    |             |
+| `organizationUnit` | string | false    |             |
+
+## tel
+
+### Properties
+
+| Property | Type   | Required | Description |
+|----------|--------|----------|-------------|
+| `type`   | string | false    |             |
+| `value`  | string | false    |             |
+

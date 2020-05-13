@@ -3,7 +3,6 @@ package main
 import (
 	"bytes"
 	"flag"
-	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -21,8 +20,9 @@ func TestSchema(t *testing.T) {
 		{name: "address", schema: "address.schema.json"},
 		{name: "arrays", schema: "arrays.schema.json"},
 		{name: "basic", schema: "basic.schema.json"},
-		{name: "geo", schema: "geo.schema.json"},
-		{name: "plugin", schema: "plugin.schema.json"},
+		{name: "calendar", schema: "calendar.schema.json"},
+		{name: "card", schema: "card.schema.json"},
+		{name: "geographical-location", schema: "geographical-location.schema.json"},
 	}
 
 	for _, tt := range schemaTests {
@@ -42,14 +42,13 @@ func TestSchema(t *testing.T) {
 			buf.WriteString(schema.Markdown(1))
 
 			gp := filepath.Join("testdata", strings.Replace(t.Name()+".golden", "/", "_", -1))
-			fmt.Println(gp)
 			if *update {
 				if err := ioutil.WriteFile(gp, buf.Bytes(), 0644); err != nil {
 					t.Fatal("failed to update golden ")
 				}
 			}
 
-			g, err := ioutil.ReadFile(filepath.Join("testdata", t.Name()+".golden"))
+			g, err := ioutil.ReadFile(gp)
 			if err != nil {
 				t.Fatal(err)
 			}
