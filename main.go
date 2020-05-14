@@ -18,6 +18,7 @@ func main() {
 
 	if *schemaPath == "" {
 		fmt.Println("no path to schema")
+		os.Exit(1)
 	}
 
 	f, err := os.Open(*schemaPath)

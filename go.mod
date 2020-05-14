@@ -1,4 +1,4 @@
-module github.com/grafana/plugin-schema
+module github.com/grafana/json-schema-docs
 
 go 1.14
 
