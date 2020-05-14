@@ -101,19 +101,20 @@ func (s schema) Markdown(level int) string {
 			propType = fmt.Sprintf("[%s](#%s)", p.Type, strings.ToLower(k))
 		case "array":
 			if p.Items != nil {
-				propType = fmt.Sprintf("[%s](#%s)", p.Type, strings.ToLower(p.Items.Type))
+				propType = fmt.Sprintf("[%s](#%s)", p.Type, strings.ToLower(k))
+			} else {
+				propType = p.Type
 			}
-			propType = p.Type
 		default:
 			propType = p.Type
 		}
 
-		isRequired := in(s.Required, k)
-		required := fmt.Sprintf("%v", isRequired)
-
 		// Emphasize required properties.
-		if isRequired {
-			required = fmt.Sprintf("**%s**", required)
+		var required string
+		if in(s.Required, k) {
+			required = "**Yes**"
+		} else {
+			required = "No"
 		}
 
 		rows = append(rows, []string{fmt.Sprintf("`%s`", k), propType, required, p.Description})
