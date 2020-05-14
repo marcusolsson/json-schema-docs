@@ -6,6 +6,6 @@ A geographical coordinate.
 
 | Property    | Type   | Required | Description |
 |-------------|--------|----------|-------------|
-| `latitude`  | number | **true** |             |
-| `longitude` | number | **true** |             |
+| `latitude`  | number | **Yes**  |             |
+| `longitude` | number | **Yes**  |             |
 

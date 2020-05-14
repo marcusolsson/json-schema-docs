@@ -4,15 +4,15 @@ A representation of an event
 
 | Property      | Type   | Required | Description         |
 |---------------|--------|----------|---------------------|
-| `dtstart`     | string | **true** | Event starting time |
-| `summary`     | string | **true** |                     |
-| `category`    | string | false    |                     |
-| `description` | string | false    |                     |
-| `dtend`       | string | false    | Event ending time   |
-| `duration`    | string | false    | Event duration      |
-| `geo`         |        | false    |                     |
-| `location`    | string | false    |                     |
-| `rdate`       | string | false    | Recurrence date     |
-| `rrule`       | string | false    | Recurrence rule     |
-| `url`         | string | false    |                     |
+| `dtstart`     | string | **Yes**  | Event starting time |
+| `summary`     | string | **Yes**  |                     |
+| `category`    | string | No       |                     |
+| `description` | string | No       |                     |
+| `dtend`       | string | No       | Event ending time   |
+| `duration`    | string | No       | Event duration      |
+| `geo`         |        | No       |                     |
+| `location`    | string | No       |                     |
+| `rdate`       | string | No       | Recurrence date     |
+| `rrule`       | string | No       | Recurrence rule     |
+| `url`         | string | No       |                     |
 

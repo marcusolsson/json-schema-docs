@@ -4,7 +4,7 @@
 
 | Property    | Type    | Required | Description                                               |
 |-------------|---------|----------|-----------------------------------------------------------|
-| `age`       | integer | false    | Age in years which must be equal to or greater than zero. |
-| `firstName` | string  | false    | The person's first name.                                  |
-| `lastName`  | string  | false    | The person's last name.                                   |
+| `age`       | integer | No       | Age in years which must be equal to or greater than zero. |
+| `firstName` | string  | No       | The person's first name.                                  |
+| `lastName`  | string  | No       | The person's last name.                                   |
 

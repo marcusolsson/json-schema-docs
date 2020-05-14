@@ -2,28 +2,28 @@ A representation of a person, company, organization, or place
 
 ## Properties
 
-| Property          | Type             | Required | Description    |
-|-------------------|------------------|----------|----------------|
-| `familyName`      | string           | **true** |                |
-| `givenName`       | string           | **true** |                |
-| `additionalName`  | array            | false    |                |
-| `adr`             |                  | false    |                |
-| `bday`            | string           | false    |                |
-| `email`           | [object](#email) | false    |                |
-| `fn`              | string           | false    | Formatted Name |
-| `geo`             |                  | false    |                |
-| `honorificPrefix` | array            | false    |                |
-| `honorificSuffix` | array            | false    |                |
-| `logo`            | string           | false    |                |
-| `nickname`        | string           | false    |                |
-| `org`             | [object](#org)   | false    |                |
-| `photo`           | string           | false    |                |
-| `role`            | string           | false    |                |
-| `sound`           | string           | false    |                |
-| `tel`             | [object](#tel)   | false    |                |
-| `title`           | string           | false    |                |
-| `tz`              | string           | false    |                |
-| `url`             | string           | false    |                |
+| Property          | Type                      | Required | Description    |
+|-------------------|---------------------------|----------|----------------|
+| `familyName`      | string                    | **Yes**  |                |
+| `givenName`       | string                    | **Yes**  |                |
+| `additionalName`  | [array](#additionalname)  | No       |                |
+| `adr`             |                           | No       |                |
+| `bday`            | string                    | No       |                |
+| `email`           | [object](#email)          | No       |                |
+| `fn`              | string                    | No       | Formatted Name |
+| `geo`             |                           | No       |                |
+| `honorificPrefix` | [array](#honorificprefix) | No       |                |
+| `honorificSuffix` | [array](#honorificsuffix) | No       |                |
+| `logo`            | string                    | No       |                |
+| `nickname`        | string                    | No       |                |
+| `org`             | [object](#org)            | No       |                |
+| `photo`           | string                    | No       |                |
+| `role`            | string                    | No       |                |
+| `sound`           | string                    | No       |                |
+| `tel`             | [object](#tel)            | No       |                |
+| `title`           | string                    | No       |                |
+| `tz`              | string                    | No       |                |
+| `url`             | string                    | No       |                |
 
 ## email
 
@@ -31,8 +31,8 @@ A representation of a person, company, organization, or place
 
 | Property | Type   | Required | Description |
 |----------|--------|----------|-------------|
-| `type`   | string | false    |             |
-| `value`  | string | false    |             |
+| `type`   | string | No       |             |
+| `value`  | string | No       |             |
 
 ## org
 
@@ -40,8 +40,8 @@ A representation of a person, company, organization, or place
 
 | Property           | Type   | Required | Description |
 |--------------------|--------|----------|-------------|
-| `organizationName` | string | false    |             |
-| `organizationUnit` | string | false    |             |
+| `organizationName` | string | No       |             |
+| `organizationUnit` | string | No       |             |
 
 ## tel
 
@@ -49,6 +49,6 @@ A representation of a person, company, organization, or place
 
 | Property | Type   | Required | Description |
 |----------|--------|----------|-------------|
-| `type`   | string | false    |             |
-| `value`  | string | false    |             |
+| `type`   | string | No       |             |
+| `value`  | string | No       |             |
 

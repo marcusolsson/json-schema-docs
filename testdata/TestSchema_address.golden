@@ -4,11 +4,11 @@ An address similar to http://microformats.org/wiki/h-card
 
 | Property           | Type   | Required | Description |
 |--------------------|--------|----------|-------------|
-| `country-name`     | string | **true** |             |
-| `locality`         | string | **true** |             |
-| `region`           | string | **true** |             |
-| `extended-address` | string | false    |             |
-| `post-office-box`  | string | false    |             |
-| `postal-code`      | string | false    |             |
-| `street-address`   | string | false    |             |
+| `country-name`     | string | **Yes**  |             |
+| `locality`         | string | **Yes**  |             |
+| `region`           | string | **Yes**  |             |
+| `extended-address` | string | No       |             |
+| `post-office-box`  | string | No       |             |
+| `postal-code`      | string | No       |             |
+| `street-address`   | string | No       |             |
 

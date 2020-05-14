@@ -2,8 +2,8 @@ A representation of a person, company, organization, or place
 
 ## Properties
 
-| Property     | Type  | Required | Description |
-|--------------|-------|----------|-------------|
-| `fruits`     | array | false    |             |
-| `vegetables` | array | false    |             |
+| Property     | Type                 | Required | Description |
+|--------------|----------------------|----------|-------------|
+| `fruits`     | [array](#fruits)     | No       |             |
+| `vegetables` | [array](#vegetables) | No       |             |
 
