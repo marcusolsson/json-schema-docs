@@ -2,8 +2,17 @@ A representation of a person, company, organization, or place
 
 ## Properties
 
-| Property     | Type                 | Required | Description |
-|--------------|----------------------|----------|-------------|
-| `fruits`     | [array](#fruits)     | No       |             |
-| `vegetables` | [array](#vegetables) | No       |             |
+| Property     | Type                    | Required | Description |
+|--------------|-------------------------|----------|-------------|
+| `fruits`     | string[]                | No       |             |
+| `vegetables` | [object](#vegetables)[] | No       |             |
+
+## vegetables
+
+### Properties
+
+| Property     | Type    | Required | Description                |
+|--------------|---------|----------|----------------------------|
+| `veggieLike` | boolean | **Yes**  | Do I like this vegetable?  |
+| `veggieName` | string  | **Yes**  | The name of the vegetable. |
 

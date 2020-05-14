@@ -61,8 +61,8 @@
         }
       }
     },
-    "adr": { "$ref": "http://example.com/address.schema.json" },
-    "geo": { "$ref": "http://example.com/geographical-location.schema.json" },
+    "adr": { "$ref": "./address.schema.json" },
+    "geo": { "$ref": "./geographical-location.schema.json" },
     "tz": {
       "type": "string"
     },

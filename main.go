@@ -1,8 +1,10 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"os"
 	"text/template"
@@ -27,10 +29,13 @@ func main() {
 	}
 	defer f.Close()
 
-	schema, err := newSchema(f)
+	schema, err := newSchema(f, ".")
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	b, _ := json.MarshalIndent(schema, "", "  ")
+	ioutil.WriteFile("new.json", b, 0644)
 
 	tpl, err := getOrDefaultTemplate(*templatePath)
 	if err != nil {

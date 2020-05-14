@@ -23,6 +23,7 @@ func TestSchema(t *testing.T) {
 		{name: "calendar", schema: "calendar.schema.json"},
 		{name: "card", schema: "card.schema.json"},
 		{name: "geographical-location", schema: "geographical-location.schema.json"},
+		{name: "ref-hell", schema: "ref-hell.schema.json"},
 	}
 
 	for _, tt := range schemaTests {
@@ -33,7 +34,7 @@ func TestSchema(t *testing.T) {
 			}
 			defer f.Close()
 
-			schema, err := newSchema(f)
+			schema, err := newSchema(f, "testdata")
 			if err != nil {
 				t.Fatal(err)
 			}
@@ -54,6 +55,7 @@ func TestSchema(t *testing.T) {
 			}
 
 			if !bytes.Equal(buf.Bytes(), g) {
+				t.Log(buf.String())
 				t.Errorf("data does not match .golden file")
 			}
 		})

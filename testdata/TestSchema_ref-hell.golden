@@ -2,6 +2,74 @@ A representation of a person, company, organization, or place
 
 ## Properties
 
+| Property     | Type                    | Required | Description |
+|--------------|-------------------------|----------|-------------|
+| `fruits`     | [object](#fruits)[]     | No       |             |
+| `vegetables` | [object](#vegetables)[] | No       |             |
+
+## fruits
+
+### Properties
+
+| Property | Type            | Required | Description                                                   |
+|----------|-----------------|----------|---------------------------------------------------------------|
+| `adr`    | [object](#adr)  | No       | An address similar to http://microformats.org/wiki/h-card     |
+| `cal`    | [object](#cal)  | No       | A representation of an event                                  |
+| `card`   | [object](#card) | No       | A representation of a person, company, organization, or place |
+
+### adr
+
+An address similar to http://microformats.org/wiki/h-card
+
+#### Properties
+
+| Property           | Type   | Required | Description |
+|--------------------|--------|----------|-------------|
+| `country-name`     | string | **Yes**  |             |
+| `locality`         | string | **Yes**  |             |
+| `region`           | string | **Yes**  |             |
+| `extended-address` | string | No       |             |
+| `post-office-box`  | string | No       |             |
+| `postal-code`      | string | No       |             |
+| `street-address`   | string | No       |             |
+
+### cal
+
+A representation of an event
+
+#### Properties
+
+| Property      | Type           | Required | Description                |
+|---------------|----------------|----------|----------------------------|
+| `dtstart`     | string         | **Yes**  | Event starting time        |
+| `summary`     | string         | **Yes**  |                            |
+| `category`    | string         | No       |                            |
+| `description` | string         | No       |                            |
+| `dtend`       | string         | No       | Event ending time          |
+| `duration`    | string         | No       | Event duration             |
+| `geo`         | [object](#geo) | No       | A geographical coordinate. |
+| `location`    | string         | No       |                            |
+| `rdate`       | string         | No       | Recurrence date            |
+| `rrule`       | string         | No       | Recurrence rule            |
+| `url`         | string         | No       |                            |
+
+#### geo
+
+A geographical coordinate.
+
+##### Properties
+
+| Property    | Type   | Required | Description |
+|-------------|--------|----------|-------------|
+| `latitude`  | number | **Yes**  |             |
+| `longitude` | number | **Yes**  |             |
+
+### card
+
+A representation of a person, company, organization, or place
+
+#### Properties
+
 | Property          | Type             | Required | Description                                               |
 |-------------------|------------------|----------|-----------------------------------------------------------|
 | `familyName`      | string           | **Yes**  |                                                           |
@@ -25,11 +93,11 @@ A representation of a person, company, organization, or place
 | `tz`              | string           | No       |                                                           |
 | `url`             | string           | No       |                                                           |
 
-## adr
+#### adr
 
 An address similar to http://microformats.org/wiki/h-card
 
-### Properties
+##### Properties
 
 | Property           | Type   | Required | Description |
 |--------------------|--------|----------|-------------|
@@ -41,41 +109,50 @@ An address similar to http://microformats.org/wiki/h-card
 | `postal-code`      | string | No       |             |
 | `street-address`   | string | No       |             |
 
-## email
+#### email
 
-### Properties
+##### Properties
 
 | Property | Type   | Required | Description |
 |----------|--------|----------|-------------|
 | `type`   | string | No       |             |
 | `value`  | string | No       |             |
 
-## geo
+#### geo
 
 A geographical coordinate.
 
-### Properties
+##### Properties
 
 | Property    | Type   | Required | Description |
 |-------------|--------|----------|-------------|
 | `latitude`  | number | **Yes**  |             |
 | `longitude` | number | **Yes**  |             |
 
-## org
+#### org
 
-### Properties
+##### Properties
 
 | Property           | Type   | Required | Description |
 |--------------------|--------|----------|-------------|
 | `organizationName` | string | No       |             |
 | `organizationUnit` | string | No       |             |
 
-## tel
+#### tel
 
-### Properties
+##### Properties
 
 | Property | Type   | Required | Description |
 |----------|--------|----------|-------------|
 | `type`   | string | No       |             |
 | `value`  | string | No       |             |
+
+## vegetables
+
+### Properties
+
+| Property     | Type    | Required | Description                |
+|--------------|---------|----------|----------------------------|
+| `veggieLike` | boolean | **Yes**  | Do I like this vegetable?  |
+| `veggieName` | string  | **Yes**  | The name of the vegetable. |
 
