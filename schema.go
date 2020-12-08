@@ -27,6 +27,7 @@ type schema struct {
 	Properties  map[string]*schema `json:"properties,omitempty"`
 	Items       *schema            `json:"items,omitempty"`
 	Definitions map[string]*schema `json:"definitions,omitempty"`
+	Enum        []string           `json:"enum"`
 }
 
 func newSchema(r io.Reader, workingDir string) (*schema, error) {
@@ -159,7 +160,13 @@ func printProperties(w io.Writer, s *schema) {
 			required = "No"
 		}
 
-		rows = append(rows, []string{fmt.Sprintf("`%s`", k), propType, required, p.Description})
+		desc := p.Description
+
+		if len(p.Enum) > 0 {
+			desc += " Possible values are: `" + strings.Join(p.Enum, "`, `") + "`."
+		}
+
+		rows = append(rows, []string{fmt.Sprintf("`%s`", k), propType, required, strings.TrimSpace(desc)})
 	}
 
 	// Sort by the required column, then by the name column.
