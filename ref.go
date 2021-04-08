@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"log"
 	"net/http"
@@ -13,11 +12,6 @@ import (
 	"github.com/bitly/go-simplejson"
 	"github.com/xeipuuv/gojsonpointer"
 )
-
-func dumpSchema(schem *schema) {
-	b, _ := json.MarshalIndent(schem, "", "  ")
-	fmt.Println(string(b))
-}
 
 // resolveSchema recursively resolves schemas.
 func resolveSchema(schem *schema, dir string, root *simplejson.Json) (*schema, error) {

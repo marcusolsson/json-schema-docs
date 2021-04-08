@@ -3,7 +3,6 @@ package main
 import (
 	"bytes"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -13,8 +12,6 @@ import (
 	"github.com/bitly/go-simplejson"
 	"github.com/olekukonko/tablewriter"
 )
-
-var errCrossSchemaReference = errors.New("cross-schema reference")
 
 type schema struct {
 	ID          string             `json:"$id,omitempty"`
@@ -62,7 +59,7 @@ func (s schema) Markdown(level int) string {
 	var buf bytes.Buffer
 
 	if s.Title != "" {
-		fmt.Fprintln(&buf, strings.Repeat("#", level)+" "+s.Title)
+		fmt.Fprintln(&buf, makeHeading(s.Title, level))
 		fmt.Fprintln(&buf)
 	}
 
@@ -72,7 +69,7 @@ func (s schema) Markdown(level int) string {
 	}
 
 	if len(s.Properties) > 0 {
-		fmt.Fprintln(&buf, strings.Repeat("#", level+1)+" Properties")
+		fmt.Fprintln(&buf, makeHeading("Properties", level+1))
 		fmt.Fprintln(&buf)
 	}
 
@@ -82,10 +79,22 @@ func (s schema) Markdown(level int) string {
 	fmt.Fprintln(&buf)
 
 	for _, obj := range findDefinitions(&s) {
-		fmt.Fprintf(&buf, obj.Markdown(level+1))
+		fmt.Fprint(&buf, obj.Markdown(level+1))
 	}
 
 	return buf.String()
+}
+
+func makeHeading(heading string, level int) string {
+	if level < 0 {
+		return heading
+	}
+
+	if level <= 6 {
+		return strings.Repeat("#", level) + " " + heading
+	}
+
+	return fmt.Sprintf("**%s**", heading)
 }
 
 func findDefinitions(s *schema) []*schema {

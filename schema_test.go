@@ -16,6 +16,7 @@ func TestSchema(t *testing.T) {
 	schemaTests := []struct {
 		name   string
 		schema string
+		level  int
 	}{
 		{name: "address", schema: "address.schema.json"},
 		{name: "arrays", schema: "arrays.schema.json"},
@@ -24,6 +25,7 @@ func TestSchema(t *testing.T) {
 		{name: "card", schema: "card.schema.json"},
 		{name: "geographical-location", schema: "geographical-location.schema.json"},
 		{name: "ref-hell", schema: "ref-hell.schema.json"},
+		{name: "deep-headings", schema: "ref-hell.schema.json", level: 5},
 	}
 
 	for _, tt := range schemaTests {
@@ -40,7 +42,12 @@ func TestSchema(t *testing.T) {
 			}
 
 			var buf bytes.Buffer
-			buf.WriteString(schema.Markdown(1))
+
+			if tt.level > 0 {
+				buf.WriteString(schema.Markdown(tt.level))
+			} else {
+				buf.WriteString(schema.Markdown(1))
+			}
 
 			gp := filepath.Join("testdata", strings.Replace(t.Name()+".golden", "/", "_", -1))
 			if *update {
