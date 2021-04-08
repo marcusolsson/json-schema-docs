@@ -9,25 +9,25 @@ This generator doesn't attempt to support the full JSON Schema specification. In
 
 ## Install
 
-```
-go get -u github.com/grafana/json-schema-docs
+```bash
+go install github.com/grafana/json-schema-docs
 ```
 
 ## Run
 
-```
+```bash
 json-schema-docs -schema ./user.schema.json > user.md
 ```
 
 To use a template when generating the Markdown:
 
-```
+```bash
 json-schema-docs -schema ./user.schema.json -template user.md.tpl > user.md
 ```
 
 `template` is the path to a file containing a Go template, such as this one:
 
-```
+```bash
 +++
 title = "{{ .Title }}"
 description = "{{ .Description }}"
