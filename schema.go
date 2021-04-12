@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -20,11 +21,11 @@ type schema struct {
 	Title       string             `json:"title,omitempty"`
 	Description string             `json:"description,omitempty"`
 	Required    []string           `json:"required,omitempty"`
-	Type        string             `json:"type,omitempty"`
+	Type        PropertyTypes      `json:"type,omitempty"`
 	Properties  map[string]*schema `json:"properties,omitempty"`
 	Items       *schema            `json:"items,omitempty"`
 	Definitions map[string]*schema `json:"definitions,omitempty"`
-	Enum        []string           `json:"enum"`
+	Enum        []Any              `json:"enum"`
 }
 
 func newSchema(r io.Reader, workingDir string) (*schema, error) {
@@ -104,16 +105,16 @@ func findDefinitions(s *schema) []*schema {
 
 	for k, p := range s.Properties {
 		// Use the identifier as the title.
-		if p.Type == "object" {
+		if p.Type.HasType(PropertyTypeObject) {
 			p.Title = k
 			objs = append(objs, p)
 		}
 
 		// If the property is an array of objects, use the name of the array
 		// property as the title.
-		if p.Type == "array" {
+		if p.Type.HasType(PropertyTypeArray) {
 			if p.Items != nil {
-				if p.Items.Type == "object" {
+				if p.Items.Type.HasType(PropertyTypeObject) {
 					p.Items.Title = k
 					objs = append(objs, p.Items)
 				}
@@ -143,22 +144,35 @@ func printProperties(w io.Writer, s *schema) {
 
 	for k, p := range s.Properties {
 		// Generate relative links for objects and arrays of objects.
-		var propType string
-		switch p.Type {
-		case "object":
-			propType = fmt.Sprintf("[%s](#%s)", p.Type, strings.ToLower(k))
-		case "array":
-			if p.Items != nil {
-				if p.Items.Type == "object" {
-					propType = fmt.Sprintf("[%s](#%s)[]", p.Items.Type, strings.ToLower(k))
+		var propType []string
+		for _, pt := range p.Type {
+			switch pt {
+			case PropertyTypeObject:
+				propType = append(propType, fmt.Sprintf("[object](#%s)", strings.ToLower(k)))
+			case PropertyTypeArray:
+				if p.Items != nil {
+					for _, pi := range p.Items.Type {
+						if pi == PropertyTypeObject {
+							propType = append(propType, fmt.Sprintf("[%s](#%s)[]", pi, strings.ToLower(k)))
+						} else {
+							propType = append(propType, fmt.Sprintf("%s[]", pi))
+						}
+					}
 				} else {
-					propType = fmt.Sprintf("%s[]", p.Items.Type)
+					propType = append(propType, string(pt))
 				}
-			} else {
-				propType = p.Type
+			default:
+				propType = append(propType, string(pt))
 			}
-		default:
-			propType = p.Type
+		}
+
+		var propTypeStr string
+		if len(propType) == 1 {
+			propTypeStr = propType[0]
+		} else if len(propType) == 2 {
+			propTypeStr = strings.Join(propType, " or ")
+		} else if len(propType) > 2 {
+			propTypeStr = fmt.Sprintf("%s, or %s", strings.Join(propType[:len(propType)-1], ", "), propType[len(propType)-1])
 		}
 
 		// Emphasize required properties.
@@ -172,10 +186,14 @@ func printProperties(w io.Writer, s *schema) {
 		desc := p.Description
 
 		if len(p.Enum) > 0 {
-			desc += " Possible values are: `" + strings.Join(p.Enum, "`, `") + "`."
+			var vals []string
+			for _, e := range p.Enum {
+				vals = append(vals, e.String())
+			}
+			desc += " Possible values are: `" + strings.Join(vals, "`, `") + "`."
 		}
 
-		rows = append(rows, []string{fmt.Sprintf("`%s`", k), propType, required, strings.TrimSpace(desc)})
+		rows = append(rows, []string{fmt.Sprintf("`%s`", k), propTypeStr, required, strings.TrimSpace(desc)})
 	}
 
 	// Sort by the required column, then by the name column.
@@ -201,4 +219,68 @@ func in(strs []string, str string) bool {
 		}
 	}
 	return false
+}
+
+type PropertyTypes []PropertyType
+
+func (pts *PropertyTypes) HasType(pt PropertyType) bool {
+	for _, t := range *pts {
+		if t == pt {
+			return true
+		}
+	}
+	return false
+}
+
+func (pt *PropertyTypes) UnmarshalJSON(data []byte) error {
+	var value interface{}
+	if err := json.Unmarshal(data, &value); err != nil {
+		return err
+	}
+
+	switch val := value.(type) {
+	case string:
+		*pt = []PropertyType{PropertyType(val)}
+		return nil
+	case []interface{}:
+		var pts []PropertyType
+		for _, t := range val {
+			s, ok := t.(string)
+			if !ok {
+				return errors.New("unsupported property type")
+			}
+			pts = append(pts, PropertyType(s))
+		}
+		*pt = pts
+	default:
+		return errors.New("unsupported property type")
+	}
+
+	return nil
+}
+
+type PropertyType string
+
+const (
+	PropertyTypeString  PropertyType = "string"
+	PropertyTypeNumber  PropertyType = "number"
+	PropertyTypeBoolean PropertyType = "boolean"
+	PropertyTypeObject  PropertyType = "object"
+	PropertyTypeArray   PropertyType = "array"
+	PropertyTypeNull    PropertyType = "null"
+)
+
+type Any struct {
+	value interface{}
+}
+
+func (u *Any) UnmarshalJSON(data []byte) error {
+	if err := json.Unmarshal(data, &u.value); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (u *Any) String() string {
+	return fmt.Sprintf("%v", u.value)
 }

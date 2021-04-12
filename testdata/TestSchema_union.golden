@@ -1,0 +1,27 @@
+## Properties
+
+| Property | Type                             | Required | Description                                        |
+|----------|----------------------------------|----------|----------------------------------------------------|
+| `five`   | string[], string, or null        | No       |                                                    |
+| `four`   | [object](#four), string, or null | No       |                                                    |
+| `one`    | string                           | No       | Possible values are: `auto`.                       |
+| `six`    | string[] or [object](#six)       | No       |                                                    |
+| `three`  | string, boolean, or number       | No       | Possible values are: `auto`, `true`, `false`, `1`. |
+| `two`    | string or boolean                | No       | Possible values are: `auto`, `true`, `false`.      |
+
+## four
+
+### Properties
+
+| Property | Type     | Required | Description |
+|----------|----------|----------|-------------|
+| `fruits` | string[] | No       |             |
+
+## six
+
+### Properties
+
+| Property | Type     | Required | Description |
+|----------|----------|----------|-------------|
+| `fruits` | string[] | No       |             |
+

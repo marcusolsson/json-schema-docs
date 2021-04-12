@@ -25,6 +25,7 @@ func TestSchema(t *testing.T) {
 		{name: "card", schema: "card.schema.json"},
 		{name: "geographical-location", schema: "geographical-location.schema.json"},
 		{name: "ref-hell", schema: "ref-hell.schema.json"},
+		{name: "union", schema: "union.schema.json"},
 		{name: "deep-headings", schema: "ref-hell.schema.json", level: 5},
 	}
 
