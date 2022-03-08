@@ -10,7 +10,7 @@ This generator doesn't attempt to support the full JSON Schema specification. In
 ## Install
 
 ```bash
-go install github.com/grafana/json-schema-docs
+go install github.com/marcusolsson/json-schema-docs
 ```
 
 ## Run
